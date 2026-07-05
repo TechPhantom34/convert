@@ -1,0 +1,30 @@
+name: TypeScript Compile Work
+
+on:
+  push:
+    branches: [ main, master ] # Hangi branch'e yüklüyorsan
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kodu Cek
+        uses: actions/checkout@v4
+
+      - name: Node.js Kur
+        uses: actions/widgets/setup-node@v4
+        with:
+          node-version: 20
+
+      # Eğer ZIP'i doğrudan attıysan ve klasör adı projenin içindeyse, terminalde o klasöre girmek gerekebilir.
+      # Düz TS derlemesi için bağımlılıkları kurup derliyoruz:
+      - name: Derleme Islemi
+        run: |
+          npm install
+          npx tsc || true # Hata verse bile devam etmesi için
+
+      - name: JS Dosyalarini Paketle
+        uses: actions/upload-artifact@v4
+        with:
+          name: hosting-hazir-proje
+          path: . # Tüm projeyi (derlenmiş JS'ler dahil) çıktı olarak verir

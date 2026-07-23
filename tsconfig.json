@@ -33,7 +33,7 @@
      * import the TS file instead. We define a custom path to steer it
      * away from the TS file.
      */
-    "baseUrl": "/",
+    "baseUrl": ".",
     "paths": {
       "qoi-fu": ["./src/handlers/qoi-fu/transpiled/QOI.js"],
       "qoa-fu": ["./src/handlers/qoa-fu/transpiled/QOA.js"]
